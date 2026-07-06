@@ -75,6 +75,50 @@
             overflow: hidden !important;
         }
 
+        /* =========================================================
+   SVG GLOBAL CLASSES (Replaces Text Emojis)
+   ========================================================= */
+        .inline-heart {
+            width: 1.1em;
+            height: 1.1em;
+            vertical-align: -0.15em;
+            display: inline-block;
+            fill: #ff4f8b;
+            filter: drop-shadow(0 0 8px rgba(255, 79, 139, 0.5));
+        }
+
+        .icon-svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .tl-icon {
+            width: 1.8rem;
+            height: 1.8rem;
+            margin-right: 10px;
+            stroke: #ff7eb3;
+            color: #ff7eb3;
+        }
+
+        .tl-icon.solid {
+            fill: #ff7eb3;
+            stroke: none;
+        }
+
+        .counter-icon {
+            width: 2.6rem;
+            height: 2.6rem;
+            margin-bottom: 12px;
+            stroke: #ff7eb3;
+            color: #ff7eb3;
+            filter: drop-shadow(0 0 10px rgba(255, 126, 179, 0.4));
+        }
+
+        .counter-icon.solid {
+            fill: #ff7eb3;
+            stroke: none;
+        }
+
         /* Animated dreamy background */
         .bg-canvas {
             position: fixed;
@@ -153,11 +197,14 @@
 
         .floating-heart {
             position: absolute;
-            font-size: 18px;
-            color: rgba(255, 182, 213, 0.85);
             animation: floatUp linear forwards;
-            text-shadow: 0 0 10px rgba(255, 126, 179, 0.8);
+            filter: drop-shadow(0 0 10px rgba(255, 126, 179, 0.8));
             user-select: none;
+        }
+
+        .floating-heart svg {
+            width: 100%;
+            height: 100%;
         }
 
         @keyframes floatUp {
@@ -227,10 +274,16 @@
         }
 
         .loader-heart {
-            font-size: 60px;
+            width: 60px;
+            height: 60px;
             color: #ff7eb3;
             animation: heartbeat 1.2s ease-in-out infinite;
             filter: drop-shadow(0 0 20px rgba(255, 126, 179, 0.8));
+        }
+
+        .loader-heart svg {
+            width: 100%;
+            height: 100%;
         }
 
         .loader-text {
@@ -658,73 +711,25 @@
             z-index: 2;
         }
 
-        .couple-silhouette {
+        /* Custom Photo Container */
+        .couple-photo-container {
             position: relative;
             width: min(280px, 70vw);
-            height: 200px;
+            height: min(280px, 70vw);
             margin: 0 auto 30px;
+            /* border-radius: 50%;
+            padding: 6px;
+            background: linear-gradient(135deg, #ff7eb3, #c77dff);
+            box-shadow: 0 0 40px rgba(255, 126, 179, 0.5);
+            animation: orbFloat 6s ease-in-out infinite; */
         }
 
-        .couple-silhouette .person {
-            position: absolute;
-            bottom: 0;
-            width: 90px;
-            height: 170px;
-            background: linear-gradient(180deg, #ff7eb3, #9d4edd);
-            border-radius: 45px 45px 8px 8px;
-            box-shadow: 0 0 30px rgba(255, 126, 179, 0.5);
-        }
-
-        .couple-silhouette .person::before {
-            content: '';
-            position: absolute;
-            top: -32px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: linear-gradient(180deg, #ffd9e8, #ff7eb3);
-            box-shadow: 0 0 20px rgba(255, 182, 213, 0.7);
-        }
-
-        .couple-silhouette .person.a {
-            left: 30px;
-            transform: rotate(-6deg);
-        }
-
-        .couple-silhouette .person.b {
-            right: 30px;
-            transform: rotate(6deg);
-            background: linear-gradient(180deg, #c77dff, #7873f5);
-        }
-
-        .couple-silhouette .person.b::before {
-            background: linear-gradient(180deg, #fbc2eb, #c77dff);
-        }
-
-        .couple-silhouette .heart-between {
-            position: absolute;
-            left: 50%;
-            top: 40px;
-            transform: translateX(-50%);
-            font-size: 34px;
-            color: #ff4f8b;
-            animation: heartbeat 1.4s ease-in-out infinite;
-            filter: drop-shadow(0 0 15px rgba(255, 79, 139, 0.9));
-            z-index: 3;
-        }
-
-        .couple-silhouette .ground {
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 220px;
-            height: 14px;
-            border-radius: 50%;
-            background: radial-gradient(ellipse, rgba(255, 126, 179, 0.4), transparent 70%);
-            filter: blur(4px);
+        .couple-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* border-radius: 50%;
+            border: 4px solid #1a0a1f; */
         }
 
         .hero-typewriter {
@@ -842,17 +847,14 @@
             font-size: 1.5rem;
             color: #ffd9e8;
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
         }
 
         .tl-card p {
             color: rgba(255, 245, 247, 0.88);
             font-size: .98rem;
             line-height: 1.7;
-        }
-
-        .tl-card .emoji {
-            font-size: 1.4rem;
-            margin-right: 6px;
         }
 
         @media(min-width:700px) {
@@ -880,6 +882,16 @@
 
             .tl-item:nth-child(even) .dot {
                 left: -11px;
+            }
+
+            .tl-item:nth-child(odd) .tl-card h3 {
+                justify-content: flex-end;
+            }
+
+            .tl-item:nth-child(odd) .tl-card h3 .tl-icon {
+                margin-left: 10px;
+                margin-right: 0;
+                order: 2;
             }
         }
 
@@ -930,12 +942,6 @@
             letter-spacing: 1px;
             color: rgba(255, 245, 247, 0.85);
             text-transform: uppercase;
-        }
-
-        .counter-card .ic {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            display: block;
         }
 
         /* =========================================================
@@ -1023,14 +1029,23 @@
         }
 
         .big-heart {
-            font-size: clamp(7rem, 25vw, 11rem);
+            width: clamp(7rem, 25vw, 11rem);
+            height: clamp(7rem, 25vw, 11rem);
             cursor: none;
             color: #ff4f8b;
             filter: drop-shadow(0 0 30px rgba(255, 79, 139, 0.9));
             animation: heartbeat 1.4s ease-in-out infinite;
             transition: transform .2s ease;
             user-select: none;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .big-heart svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
         }
 
         @media (max-width:768px) {
@@ -1249,13 +1264,21 @@
         .heart-message-icon {
             position: relative;
             z-index: 2;
-            font-size: clamp(3rem, 12vw, 5rem);
+            width: clamp(3rem, 12vw, 5rem);
+            height: clamp(3rem, 12vw, 5rem);
             margin-bottom: 24px;
+            color: #ff4f8b;
             filter: drop-shadow(0 0 30px rgba(255, 79, 139, 0.9));
             animation: heartbeat 1.4s ease-in-out infinite;
             opacity: 0;
             transform: scale(0.6);
             transition: opacity .8s ease, transform .8s ease;
+        }
+
+        .heart-message-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
         }
 
         #heartMessageOverlay.show .heart-message-icon {
@@ -1302,6 +1325,11 @@
         }
 
         .grand-heart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
             font-family: var(--font-serif);
             font-weight: 700;
             font-size: clamp(2.5rem, 12vw, 6rem);
@@ -1419,7 +1447,12 @@
      PREMIUM LOADER
      ===================================================== -->
     <div id="loader">
-        <div class="loader-heart">❤️</div>
+        <div class="loader-heart">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+        </div>
         <div class="loader-text">Loading our love story…</div>
         <div class="loader-bar"><span></span></div>
     </div>
@@ -1430,7 +1463,11 @@
     <div id="welcome">
         <div class="welcome-glow-orb"></div>
         <div class="welcome-glow-orb b"></div>
-        <h1 class="welcome-title">Happy First Proposal Anniversary <span class="heart">❤️</span></h1>
+        <h1 class="welcome-title">Happy First Proposal Anniversary <span class="heart"><svg class="inline-heart"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg></span></h1>
         <p class="welcome-sub">One year ago, I asked you a question… Today, I'd like you to relive that beautiful moment
             once again.</p>
         <button class="open-heart-btn" id="openHeartBtn">Open My Heart</button>
@@ -1452,11 +1489,8 @@
         <!-- 0. HERO -->
         <section id="hero">
             <div class="hero-inner">
-                <div class="couple-silhouette">
-                    <div class="person a"></div>
-                    <div class="person b"></div>
-                    <div class="heart-between">❤️</div>
-                    <div class="ground"></div>
+                <div class="couple-photo-container">
+                    <img src="./image-us.png" alt="Us" class="couple-photo" />
                 </div>
                 <div class="hero-typewriter" id="heroType"></div>
 
@@ -1471,45 +1505,94 @@
             <h2 class="section-title">Our Little Forever</h2>
             <p class="section-sub">Every chapter with you became a memory I never want to forget.</p>
             <div class="timeline" id="timeline">
+
                 <div class="tl-item">
                     <div class="dot"></div>
                     <div class="tl-card">
-                        <h3><span class="emoji">🌸</span>The Day We Met</h3>
-                        <p>Two strangers, one unexpected hello — and somehow the whole universe tilted to bring us
+                        <h3>
+                            <svg class="icon-svg tl-icon" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v2" />
+                                <path d="M12 20v2" />
+                                <path d="m4.93 4.93 1.41 1.41" />
+                                <path d="m17.66 17.66 1.41 1.41" />
+                                <path d="M2 12h2" />
+                                <path d="M20 12h2" />
+                                <path d="m6.34 17.66-1.41 1.41" />
+                                <path d="m19.07 4.93-1.41 1.41" />
+                            </svg>
+                            The Day We Met
+                        </h3>
+                        <p>Two strangers, one belated birthday wish — and somehow the whole universe tilted to bring us
                             together.</p>
                     </div>
                 </div>
+
                 <div class="tl-item">
                     <div class="dot"></div>
                     <div class="tl-card">
-                        <h3><span class="emoji">✨</span>Best Memories</h3>
-                        <p>Every laugh, every late-night talk, every silly inside joke — small moments that became my
+                        <h3>
+                            <svg class="icon-svg tl-icon" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                                <circle cx="12" cy="13" r="4" />
+                            </svg>
+                            Best Memories
+                        </h3>
+                        <p>Every laugh, every shared moment, every silly inside joke — small moments that became my
                             treasures.</p>
                     </div>
                 </div>
+
                 <div class="tl-item">
                     <div class="dot"></div>
                     <div class="tl-card">
-                        <h3><span class="emoji">💍</span>The Proposal</h3>
+                        <h3>
+                            <svg class="icon-svg tl-icon" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z" />
+                                <path d="M10 6L8 3l4-1 4 1-2 3" />
+                                <path d="M8 3l4 3 4-3" />
+                            </svg>
+                            The Proposal
+                        </h3>
                         <p>One sleepless night, one brave question, one heart that finally found the courage to speak.
                         </p>
                     </div>
                 </div>
+
                 <div class="tl-item">
                     <div class="dot"></div>
                     <div class="tl-card">
-                        <h3><span class="emoji">🌟</span>One Amazing Year Together</h3>
+                        <h3>
+                            <svg class="icon-svg tl-icon" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            One Amazing Year Together
+                        </h3>
                         <p>365 days of growing, loving, healing, and discovering that home was never a place — it was
                             you.</p>
                     </div>
                 </div>
+
                 <div class="tl-item">
                     <div class="dot"></div>
                     <div class="tl-card">
-                        <h3><span class="emoji">❤️</span>Today</h3>
+                        <h3>
+                            <svg class="icon-svg tl-icon solid" viewBox="0 0 24 24" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                            Today
+                        </h3>
                         <p>And here we are — reliving the moment my heart chose yours, all over again.</p>
                     </div>
                 </div>
+
             </div>
 
             <div class="nav-buttons">
@@ -1523,26 +1606,69 @@
             <h2 class="section-title">A Year In Numbers</h2>
             <p class="section-sub">Some things can be counted. The most important ones… cannot.</p>
             <div class="counter-grid" id="counterGrid">
-                <div class="counter-card"><span class="ic">📅</span>
+
+                <div class="counter-card">
+                    <svg class="icon-svg counter-icon" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
                     <div class="counter-num" data-target="1">0</div>
                     <div class="counter-label">Year</div>
                 </div>
-                <div class="counter-card"><span class="ic">🗓️</span>
+
+                <div class="counter-card">
+                    <svg class="icon-svg counter-icon" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                        <path d="M8 14h.01" />
+                        <path d="M12 14h.01" />
+                        <path d="M16 14h.01" />
+                        <path d="M8 18h.01" />
+                        <path d="M12 18h.01" />
+                        <path d="M16 18h.01" />
+                    </svg>
                     <div class="counter-num" data-target="365">0</div>
                     <div class="counter-label">Days</div>
                 </div>
-                <div class="counter-card"><span class="ic">⏰</span>
+
+                <div class="counter-card">
+                    <svg class="icon-svg counter-icon" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
                     <div class="counter-num" data-target="8760">0</div>
                     <div class="counter-label">Hours</div>
                 </div>
-                <div class="counter-card"><span class="ic">😊</span>
+
+                <div class="counter-card">
+                    <svg class="icon-svg counter-icon" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
                     <div class="counter-num" data-target="∞" data-text="Countless">0</div>
                     <div class="counter-label">Smiles</div>
                 </div>
-                <div class="counter-card full-width-mobile"><span class="ic">❤️</span>
+
+                <div class="counter-card full-width-mobile">
+                    <svg class="icon-svg counter-icon solid" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
                     <div class="counter-num" data-text="Infinite">0</div>
                     <div class="counter-label">Love</div>
                 </div>
+
             </div>
 
             <div class="nav-buttons">
@@ -1571,8 +1697,19 @@
         <section id="interactiveHeart">
             <h2 class="section-title">Tap My Heart</h2>
             <p class="section-sub">Go on. I promise it still beats only for you.</p>
-            <div class="big-heart" id="bigHeart" role="button" tabindex="0" aria-label="Tap the heart">❤️</div>
-            <div class="heart-message">I Still Choose You. Every Single Day. ❤️</div>
+
+            <div class="big-heart" id="bigHeart" role="button" tabindex="0" aria-label="Tap the heart">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+            </div>
+
+            <div class="heart-message">I Still Choose You. Every Single Day. <svg class="inline-heart"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg></div>
             <div class="heart-tap-hint">tap the heart to continue</div>
 
             <div class="nav-buttons" style="margin-top: 80px;">
@@ -1585,7 +1722,11 @@
             <canvas class="final-stars" id="finalStars"></canvas>
             <div class="final-text-1" id="finalText1">Thank you for making this year the happiest chapter of my life.
             </div>
-            <div class="final-text-2" id="finalText2">Happy First Proposal Anniversary, Poulami ❤️</div>
+            <div class="final-text-2" id="finalText2">Happy First Proposal Anniversary, Polu <svg class="inline-heart"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg></div>
 
             <div class="nav-buttons" id="finalNav">
                 <!-- Back button removed from this final section -->
@@ -1601,7 +1742,12 @@
     <div id="heartMessageOverlay">
         <canvas id="heartMsgCanvas"></canvas>
         <div class="heart-message-glow"></div>
-        <div class="heart-message-icon">❤️</div>
+        <div class="heart-message-icon">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+        </div>
         <div class="heart-message-text">Thank you for making this year the happiest chapter of my life.</div>
         <div class="heart-message-hint">tap anywhere to continue</div>
     </div>
@@ -1611,7 +1757,17 @@
      ===================================================== -->
     <div id="grandFinale">
         <canvas id="grandCanvas"></canvas>
-        <div class="grand-heart">❤️ I Love You ❤️</div>
+        <div class="grand-heart">
+            <svg class="inline-heart" viewBox="0 0 24 24">
+                <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            I Love You
+            <svg class="inline-heart" viewBox="0 0 24 24">
+                <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+        </div>
         <div class="grand-sub">Yesterday. Today. Tomorrow. Forever.</div>
     </div>
 
@@ -1692,16 +1848,23 @@
         window.addEventListener('resize', resizeStars);
 
         /* =========================================================
-           FLOATING HEARTS & ROSE PETALS
+           FLOATING HEARTS & ROSE PETALS (Replaced Emojis with SVGs)
            ========================================================= */
         const floatLayer = $('#floatingLayer');
-        const heartChars = ['❤️', '💕', '💖', '💗', '💓', '💘', '🌸'];
+        const heartSVGs = [
+            '<svg viewBox="0 0 24 24" fill="#ff7eb3"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>',
+            '<svg viewBox="0 0 24 24" fill="#ffd9e8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>',
+            '<svg viewBox="0 0 24 24" fill="#c77dff"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>',
+            '<svg viewBox="0 0 24 24" fill="none" stroke="#ffb6d5" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
+        ];
         function spawnFloatingHeart() {
             const el = document.createElement('div');
             el.className = 'floating-heart';
-            el.textContent = pick(heartChars);
+            el.innerHTML = pick(heartSVGs);
             el.style.left = Math.random() * 100 + 'vw';
-            el.style.fontSize = rand(12, 26) + 'px';
+            let size = rand(16, 32);
+            el.style.width = size + 'px';
+            el.style.height = size + 'px';
             el.style.animationDuration = rand(8, 16) + 's';
             el.style.opacity = rand(0.5, 0.95);
             floatLayer.appendChild(el);
@@ -1770,7 +1933,7 @@
             playSong();
             setTimeout(() => {
                 welcome.style.display = 'none';
-                navTo(0); // Show Hero section
+                navTo(0);
                 startHeroTypewriter();
             }, 600);
             for (let i = 0; i < 20; i++) setTimeout(spawnFloatingHeart, i * 60);
@@ -1902,11 +2065,12 @@
             const el = $('#letterText');
             if (el.dataset.done) return;
             el.dataset.done = '1';
-            // Note: Empty strings removed. Margin handles spacing.
+
+            // Custom text per user request with a magic '*' character that converts to an SVG heart
             const lines = [
                 "So basically kaal sara raat amar ghum hoyni. But ami amar 98% questions er answer peye gechi.",
                 "R last question er answer ta holo. Yes I'm on the right track and I've improved a lot in a very short time. Eei track a thakle ami thik jaygay pouche jabo.",
-                "Tui toh maximum sob e janis. For me you're an unexpected blessing from God. I just found myself after so many years and I've changed a lot. Obviously in a good way. I really want to thank you for the precious friendship, thanks for coming to my life, thanks for the therapies, thanks for that soothing songs. Thanks for everything. And please don't ask me why when and how. I'm in love with you Poulami❤️, will you be mine?",
+                "Tui toh maximum sob e janis. For me you're an unexpected blessing from God. I just found myself after so many years and I've changed a lot. Obviously in a good way. I really want to thank you for the precious friendship, thanks for coming to my life, thanks for the therapies, thanks for that soothing songs. Thanks for everything. And please don't ask me why when and how. I'm in love with you Poulami*, will you be mine?",
                 "5th July 2025, 08:11 PM"
             ];
 
@@ -1918,12 +2082,13 @@
                 const line = document.createElement('div');
                 line.className = 'line';
 
-                // Style specific to the date line
+                // Custom style for the Date line
                 if (li === lines.length - 1) {
                     line.style.textAlign = 'right';
                     line.style.fontSize = '0.9rem';
                     line.style.fontStyle = 'italic';
                     line.style.color = 'rgba(255, 245, 247, 0.7)';
+                    line.style.marginTop = '10px';
                 }
 
                 el.insertBefore(line, cursor);
@@ -1933,10 +2098,19 @@
                 let ci = 0;
                 function typeChar() {
                     if (ci < text.length) {
-                        if (text.includes('Poulami')) {
+                        let currentText = text.slice(0, ci + 1);
+
+                        // Highlight logic
+                        if (currentText.includes('Poulami')) {
                             line.classList.add('highlight');
                         }
-                        line.textContent = text.slice(0, ci + 1);
+
+                        // Convert * to Inline SVG Heart
+                        if (currentText.includes('*')) {
+                            currentText = currentText.replace('*', '<svg class="inline-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+                        }
+
+                        line.innerHTML = currentText;
                         ci++;
                         setTimeout(typeChar, rand(20, 55));
                     } else {
@@ -1948,6 +2122,7 @@
             }
             el.appendChild(cursor);
             nextLine();
+
             const letterSec = $('#letter-section');
             const burst = setInterval(() => {
                 if (!document.body.contains(letterSec) || letterSec.style.display === 'none') { return; }
